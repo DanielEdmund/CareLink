@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/*  CareLink base                                                      */
+/* ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: light;
+    --focus-ring: 0 0 0 4px rgba(21, 94, 239, 0.24);
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-brand-navy font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Visible, accessible focus for keyboard users only */
+  :focus-visible {
+    outline: 2px solid #155EEF;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    @apply bg-brand-blue text-white;
+  }
+
+  /* Slim, calm scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reusable component classes (design system)                         */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* ---------- Buttons ---------- */
+  .cl-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl font-semibold
+      transition-all duration-200 ease-calm select-none
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2
+      disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] px-5 text-sm;
+  }
+  .cl-btn-sm {
+    @apply min-h-[40px] px-4 text-[13px] rounded-lg;
+  }
+  .cl-btn-lg {
+    @apply min-h-[52px] px-7 text-base rounded-2xl;
+  }
+  .cl-btn-primary {
+    @apply bg-brand-blue text-white shadow-[0_1px_2px_rgba(16,24,40,0.12)] hover:bg-brand-blue-dark hover:shadow-[0_2px_6px_rgba(16,24,40,0.16)] active:translate-y-px;
+  }
+  .cl-btn-secondary {
+    @apply bg-white text-brand-blue border border-brand-blue/25 hover:bg-brand-blue-soft hover:border-brand-blue/45 active:translate-y-px;
+  }
+  .cl-btn-aqua {
+    @apply bg-brand-aqua text-white shadow-[0_1px_2px_rgba(16,24,40,0.12)] hover:bg-brand-aqua-dark active:translate-y-px;
+  }
+  .cl-btn-ghost {
+    @apply bg-transparent text-brand-slate hover:bg-slate-100 hover:text-brand-navy;
+  }
+  .cl-btn-soft {
+    @apply bg-brand-blue-soft text-brand-blue hover:bg-[#D9E8FF];
+  }
+  .cl-btn-danger {
+    @apply bg-status-emergency text-white hover:bg-[#B42318] active:translate-y-px;
+  }
+
+  /* ---------- Cards ---------- */
+  .cl-card {
+    @apply bg-white rounded-2xl border border-slate-200/80 shadow-card;
+  }
+  .cl-card-hover {
+    @apply transition-all duration-300 ease-calm hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+  .cl-card-soft {
+    @apply bg-brand-blue-soft rounded-2xl border border-[#D6E7FF];
+  }
+  .cl-card-mint {
+    @apply bg-brand-mint rounded-2xl border border-[#C9EFE3];
+  }
+
+  /* ---------- Badges ---------- */
+  .cl-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold leading-5 whitespace-nowrap;
+  }
+  .cl-badge-success {
+    @apply bg-[#ECFDF3] text-[#027A48] border border-[#ABEFC6];
+  }
+  .cl-badge-warning {
+    @apply bg-[#FFFAEB] text-[#B54708] border border-[#FEDF89];
+  }
+  .cl-badge-emergency {
+    @apply bg-[#FEF3F2] text-[#B42318] border border-[#FECDCA];
+  }
+  .cl-badge-info {
+    @apply bg-brand-blue-soft text-brand-blue border border-[#C7DCFF];
+  }
+  .cl-badge-neutral {
+    @apply bg-slate-100 text-brand-slate border border-slate-200;
+  }
+  .cl-badge-aqua {
+    @apply bg-brand-mint text-[#087A76] border border-[#A9E7DC];
+  }
+
+  /* ---------- Inputs ---------- */
+  .cl-input {
+    @apply w-full min-h-[48px] rounded-xl border border-slate-300 bg-white px-4 text-sm text-brand-navy
+      placeholder:text-slate-400 transition-colors duration-200
+      focus:border-brand-blue focus:outline-none focus:ring-4 focus:ring-brand-blue/15;
+  }
+  .cl-label {
+    @apply block text-sm font-semibold text-brand-navy mb-1.5;
+  }
+  .cl-help {
+    @apply mt-1.5 text-xs text-brand-slate;
+  }
+
+  /* ---------- Section heading ---------- */
+  .cl-section-title {
+    @apply text-xl sm:text-2xl font-bold text-brand-navy;
+  }
+  .cl-section-sub {
+    @apply mt-1 text-sm text-brand-slate max-w-2xl;
+  }
+  .cl-eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-brand-aqua;
+  }
+
+  /* ---------- Navigation ---------- */
+  .cl-nav-item {
+    @apply relative flex items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold text-brand-slate
+      transition-all duration-200 ease-calm min-h-[48px]
+      hover:bg-white/70 hover:text-brand-navy;
+  }
+  .cl-nav-item-active {
+    @apply bg-white text-brand-blue shadow-pill;
+  }
+  .cl-nav-item-active::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-full bg-brand-blue;
+  }
+
+  /* ---------- Filter chips ---------- */
+  .cl-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2
+      text-[13px] font-semibold text-brand-slate transition-all duration-200 ease-calm min-h-[40px]
+      hover:border-brand-blue/40 hover:text-brand-blue;
+  }
+  .cl-chip-active {
+    @apply bg-brand-blue text-white border-brand-blue shadow-[0_1px_2px_rgba(16,24,40,0.12)];
+  }
+
+  /* ---------- Demo / safety notice ---------- */
+  .cl-demo-strip {
+    @apply inline-flex items-center gap-2 rounded-full bg-[#FFF7E8] border border-[#FEDF89] px-3 py-1.5
+      text-[11px] font-bold text-[#B54708] uppercase tracking-wide;
+  }
+  .cl-safety-note {
+    @apply flex items-start gap-2.5 rounded-xl bg-[#FFFAEB] border border-[#FEDF89] p-3.5 text-[13px] leading-relaxed text-[#7A2E0E];
+  }
+
+  /* ---------- Stat card ---------- */
+  .cl-stat {
+    @apply cl-card p-4 sm:p-5 flex flex-col gap-2;
+  }
+  .cl-stat-value {
+    @apply text-2xl font-bold text-brand-navy font-display tabular-nums;
+  }
+  .cl-stat-label {
+    @apply text-xs font-semibold uppercase tracking-wide text-brand-slate;
+  }
+
+  /* ---------- Skeleton loading ---------- */
+  .cl-skeleton {
+    @apply rounded-lg bg-gradient-to-r from-slate-100 via-slate-200 to-slate-100 bg-[length:400px_100%] animate-shimmer;
+  }
+
+  /* ---------- Page shell ---------- */
+  .cl-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8;
+  }
+  .cl-grid-auto {
+    @apply grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion support                                             */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* User-toggled reduced motion (Settings page) */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Optional high-contrast surface emphasis (Settings page) */
+.cl-hc .cl-card,
+.cl-hc .cl-card-soft,
+.cl-hc .cl-card-mint {
+  border-color: #101828;
+  border-width: 2px;
+}
+.cl-hc body,
+.cl-hc {
+  --focus-ring: 0 0 0 5px rgba(16, 24, 40, 0.4);
+}
